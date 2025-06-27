@@ -3,27 +3,26 @@ name: CodeQL Analysis
 on:
   push:
     branches:
-      - main  # Menentukan bahwa workflow ini dijalankan pada push ke branch main
+      - main
   pull_request:
     branches:
-      - main  # Menentukan bahwa workflow ini juga dijalankan pada pull request ke branch main
+      - main
 
 jobs:
   analyze:
-    runs-on: ubuntu-latest  # Menentukan runner yang digunakan, dalam hal ini Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Checkout repositori kode yang ada di GitHub
+        uses: actions/checkout@v4
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2  # Setup CodeQL untuk analisis
+        uses: github/codeql-action/init@v3
 
       - name: Perform CodeQL Analysis
-        run: |
-          codeql analyze --format=sarif-latest --output=results.sarif  # Menjalankan analisis dengan CodeQL
+        uses: github/codeql-action/analyze@v3
 
       - name: Upload CodeQL results
-        uses: github/codeql-action/upload-sarif@v1  # Mengunggah hasil analisis untuk di-review di GitHub
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: results.sarif  # File hasil analisis CodeQL
+          sarif_file: results.sarif
