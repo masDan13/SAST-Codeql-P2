@@ -16,8 +16,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2  # Checkout repositori kode yang ada di GitHub
 
-      - name: Set up CodeQL
-        uses: github/codeql-action/setup-codeql@v2  # Setup CodeQL untuk analisis
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2  # Setup CodeQL untuk analisis
 
       - name: Perform CodeQL Analysis
         run: |
